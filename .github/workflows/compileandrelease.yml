@@ -35,8 +35,8 @@ jobs:
       - name: Create git tag
         run: |
           git tag $GitVersion_SemVer
-      - name: git main
-        run: git checkout main
+      - name: git master
+        run: git checkout master
       - name: Push git tag
         run: git push --tag
       - name: create release and add pdf
