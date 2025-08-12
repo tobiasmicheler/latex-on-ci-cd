@@ -11,7 +11,7 @@ jobs:
               run: |
                 lscpu
             - name: Set up Git repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Lint LaTeX document
               uses: ChiefGokhlayeh/textidote-action@v5
               id: lint
