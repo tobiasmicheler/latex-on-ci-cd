@@ -20,7 +20,7 @@ jobs:
                   args: --check en --dict wordlist.txt
                   # change language and dictionary file here
             - name: Upload TeXtidote report
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v5
               with:
                   name: textidote_report
                   path: report.html
