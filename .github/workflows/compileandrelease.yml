@@ -17,15 +17,9 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v4
-        with:
-          versionSpec: '6.x'
-      - name: Determine Version
-        uses: gittools/actions/gitversion/execute@v4
-      - name: Display SemVer
-        run: |
-          echo "SemVer: $GitVersion_SemVer" && echo "$version" && echo "$major.$minor.$patch"
+      - name: Generate timestamp
+        id: version
+        run: echo "TAG_NAME=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
 
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
@@ -34,7 +28,7 @@ jobs:
 
       - name: Create git tag
         run: |
-          git tag $GitVersion_SemVer
+          git tag $TAG_NAME
       - name: git master
         run: git checkout master
       - name: Push git tag
@@ -43,4 +37,4 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "main.pdf"
-          tag: ${{ env.GitVersion_SemVer }}
+          tag: ${{ env.TAG_NAME }}
